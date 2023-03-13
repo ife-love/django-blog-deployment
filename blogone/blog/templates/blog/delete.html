@@ -1,0 +1,27 @@
+{% extends 'blog/base.html' %}
+{% block title %}Delete Blog Post{%endblock%}
+{% block content %}
+
+{% if user.is_authenticated %}
+<section class="delete-sec">
+    <div class="content">
+        <div class="container p-5">
+            <form method="post" action="">
+                {% csrf_token %}
+                {{form.as_p}}
+                <div>
+                    <p>Are you sure you want to delete "{{obj|safe|linebreaksbr}}?"</p>
+               
+                <a class="btn btn-secondary" href="{{ request.META.HTTP_REFERER }}">Cancel</a>
+                <input type="submit" class="btn btn-danger" value="Confirm">
+            </form>
+        </div>
+    </div>
+</section>
+
+{% else %}
+ACCESS DENIED!
+{% endif %}
+
+
+{% endblock %}
